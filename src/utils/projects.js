@@ -56,7 +56,7 @@ export const projectsData = [
         date: "Finalizada",
         image: Portfolio,
         description: "Portfolio personal, donde puedo exhibir mis proyectos y mis habilidades para el mundo profesional.",
-        githubLink: 'https://github.com/villella30/JuiceWrldTribute',
+        githubLink: 'https://github.com/villella30/Portfolio',
         pageLink: "https://juicewrldtribute.netlify.app/",
         avatar: <BusinessCenterIcon />,
         language1: "REACT",
