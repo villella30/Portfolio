@@ -1,0 +1,28 @@
+@media screen and (max-width: 767px) {
+    .projects-container {
+        height: auto;
+        width: 90%;
+        margin: auto auto;
+
+    }
+}
+
+
+@media screen and (max-width: 1199px) and (min-width: 768px) {
+    .projects-container {
+        height: auto;
+        width: 90%;
+        margin: auto;
+
+    }
+}
+
+@media screen and (min-width: 1200px) {
+        .projects-container {
+            margin-top: 100px;
+            height: auto;
+            width: 90%;
+            margin: 50px auto 150px auto;
+
+        }
+}

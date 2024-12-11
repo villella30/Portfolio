@@ -1,0 +1,90 @@
+/* App.css */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto";
+  display: relative;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  position: relative;
+  background: #084d41;
+}
+.app {
+  width: 100%;
+}
+.title1 {
+  font-size: 3em;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
+}
+.particles-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden; /* Asegura que no sobresalgan del viewport */
+}
+
+
+#particles-js {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* Coloca las partículas detrás del contenido */
+  top: 0;
+  left: 0;
+}
+
+
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .App {
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+    margin: auto auto;
+  }
+
+  section.hero {
+    height: 90vh;
+  }
+
+  section.skills {
+    height: 130vh;
+  }
+
+  section.projects {
+    height: 80vh;
+  }
+
+  section.contact {
+    height: 100%;
+  }
+
+
+}
+
+@media screen and (max-width: 600px) {
+  .App {
+    width: 100vw;
+  
+  }
+}

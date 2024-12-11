@@ -1,0 +1,96 @@
+.hero {
+    display: flex; /* Elementos en una fila */
+    height: 80vh;
+    flex-wrap: nowrap; /* Evita que bajen de línea */
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    padding: 50px 20px; /* Espaciado interno */
+    gap: 40px; /* Espacio entre la imagen y el texto */
+
+}
+
+.hero-img {
+    flex-shrink: 0; /* Evita que la imagen se reduzca */
+    width: 400px; /* Ajusta el tamaño de la imagen */
+    height: 400px; /* Mantén la imagen cuadrada */
+    border-radius: 50%; /* Hazla circular */
+    object-fit: cover; /* Asegura que la imagen no se deforme */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Agrega un poco de sombra */
+}
+
+.hero-content {
+    max-width: 600px; /* Limita el ancho del texto */
+    text-align: center; /* Centra el texto */
+}
+
+.hero-content h1 {
+    font-size: 2.5rem; /* Tamaño del título */
+    margin-bottom: 10px;
+    color: #fff; /* Blanco para resaltar en fondo púrpura */
+}
+
+.hero-content h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: #eee; /* Texto secundario en tono más suave */
+}
+
+.hero-content p {
+    font-size: 1rem;
+    margin-bottom: 30px;
+    line-height: 1.6;
+    color: #ddd; /* Texto en gris claro */
+}
+
+.buttons-container {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centra los botones */
+    gap: 15px; /* Espaciado entre botones */
+}
+
+.buttons-container button {
+    padding: 6px 16px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: helvetica, sans-serif;
+}
+.github {
+    background-color: #333; /* Botón GitHub */
+    color: #fff;
+}
+
+a {
+    text-decoration: none;
+}
+
+
+.icon {
+    margin-right: 5px;
+}
+.linkedin {
+    background-color: #0077b5; /* Botón LinkedIn */
+    color: #fff;
+}
+
+/* Responsive: Ajustes para pantallas pequeñas */
+@media screen and (max-width: 767px) {
+    .hero {
+        flex-direction: column; /* Apila imagen y texto */
+        padding: 20px;
+        height: 160vh;
+    }
+
+    .hero-img {
+        margin-bottom: 20px;
+    }
+
+    .hero-content {
+        text-align: center;
+    }
+}
