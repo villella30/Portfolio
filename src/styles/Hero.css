@@ -77,13 +77,28 @@ a {
     background-color: #0077b5; /* Botón LinkedIn */
     color: #fff;
 }
+@media screen and (max-width: 1000px) {
+    .hero {
+        flex-direction: column;
+        margin-top: 100px;
+        padding: 10px;
+        height: 141vh;
+        gap: 0; /* Espacio entre la imagen y el texto */
+
+    }
+
+}
+
 
 /* Responsive: Ajustes para pantallas pequeñas */
 @media screen and (max-width: 767px) {
     .hero {
-        flex-direction: column; /* Apila imagen y texto */
-        padding: 20px;
+        flex-direction: column;
+        margin-top: 75px; /* Apila imagen y texto */
+        padding: 10px;
         height: 160vh;
+        gap: 0; /* Espacio entre la imagen y el texto */
+
     }
 
     .hero-img {
