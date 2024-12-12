@@ -3,6 +3,7 @@ import Yo from "../images/MyPhoto.JPG"
 import "../styles/Hero.css"
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import DescriptionIcon from '@mui/icons-material/Description';
 
 export default function Hero(props) {
     return (
@@ -30,13 +31,19 @@ export default function Hero(props) {
 
                         <button className='button github'>
                             <GitHubIcon className='icon' />
-                            VALENTINO VILLELLA
+                            GitHub
                             </button>
                     </a>
                     <a href="https://www.linkedin.com/in/villella30/" target="_blank" rel='noreferrer'>
                         <button className='button linkedin'>
                             <LinkedInIcon className='icon' />
-                            VALENTINO VILLELLA
+                            LinkedIn
+                            </button>
+                    </a>
+                    <a href="./CV-Valentino.pdf" download="./CV-Valentino.pdf" target="_blank" rel='noreferrer'>
+                        <button className='button CV'>
+                            <DescriptionIcon className='icon' />
+                            Descargar CV
                             </button>
                     </a>
                 </div>
