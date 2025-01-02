@@ -2,6 +2,8 @@ import React from 'react'
 import "../styles/Me.css"
 
 export default function Me() {
+  const currentYear = new Date();
+  const year = currentYear.getFullYear();
   return (
     <footer className='me-container'>
       <h3>Valentino Villella</h3>
@@ -14,7 +16,7 @@ export default function Me() {
         </a>
       </div>
       <div className='copy' style={{ textAlign: 'center', marginBottom: 5}}>
-      ©2024 Valentino Villella. Todos los derechos reservados.
+          ©{year} Valentino Villella. Todos los derechos reservados.
       </div>
     </footer>
   )
