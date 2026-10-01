@@ -1,70 +1,127 @@
-# Getting Started with Create React App
+# Valentino Villella — Portfolio v2
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Portfolio personal bilingüe (ES/EN) de **Valentino Villella**, Full Stack Developer Jr y
+estudiante de Licenciatura en Sistemas (UNLa).
 
-## Available Scripts
+🔗 **https://valentino-villella.netlify.app**
 
-In the project directory, you can run:
+## Stack
 
-### `npm start`
+| Capa       | Tecnología                                            |
+| ---------- | ----------------------------------------------------- |
+| Build      | [Vite 8](https://vite.dev)                            |
+| UI         | React 19 + TypeScript 5.9 (estricto)                  |
+| Estilos    | Tailwind CSS v4 (config CSS-first en `src/index.css`) |
+| Iconos     | `simple-icons` (logos monocromos) + `lucide-react`    |
+| Formulario | `@formspree/react`                                    |
+| Deploy     | Netlify (`netlify.toml`)                              |
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+**Sin backend**: el contenido es estático y el contacto va por Formspree.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Arrancar
 
-### `npm test`
+```bash
+npm install
+npm run dev        # http://localhost:5173
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Scripts
 
-### `npm run build`
+| Comando            | Qué hace                                          |
+| ------------------ | ------------------------------------------------- |
+| `npm run dev`      | Servidor de desarrollo con HMR                    |
+| `npm run build`    | `tsc -b` + build de producción en `dist/`         |
+| `npm run preview`  | Sirve el build de producción en local             |
+| `npm run lint`     | ESLint (flat config)                              |
+| `npm run format`   | Prettier sobre todo el repo                       |
+| `npm run optimize` | Convierte `src/assets` a WebP y borra el original |
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Arquitectura de datos
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+El contenido **no vive en los componentes**. Agregar un proyecto o una skill es un objeto
+nuevo en el archivo correspondiente: el grid, los contadores de las pestañas, los badges y
+los iconos se actualizan solos.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+src/
+├── types/index.ts        Tipos compartidos (Project, Skill, Education…)
+├── data/
+│   ├── profile.ts        Nombre, rol, links, email, CV, resumen
+│   ├── projects.ts       ★ 8 proyectos (académicos + personales)
+│   ├── skills.ts         ★ 25 skills en 5 categorías
+│   ├── experience.ts     ⚠️  placeholders — completar con datos reales
+│   ├── education.ts      Lic. Sistemas UNLa + Técnico en Electrónica
+│   └── nav.ts            Orden del menú
+├── i18n/
+│   ├── strings.ts        Copy de UI (es/en) — tipado a prueba de cambios
+│   ├── context.ts        Contexto de idioma
+│   ├── LanguageProvider  Provider + <html lang> + localStorage
+│   └── useLanguage.ts    Hook `useLanguage()`
+├── hooks/                useSectionSpy, useReveal (IntersectionObserver)
+├── components/
+│   ├── layout/           Layout, Navbar, Footer, LanguageToggle
+│   ├── effects/          GradientBackdrop (fondo animado)
+│   ├── ui/               GlassCard, Button, Badge, TechIcon, TechBadges…
+│   └── sections/         Hero, About, Skills, Projects, Experience, Education, Contact
+└── assets/               Fotos y screenshots (WebP optimizado)
+```
 
-### `npm run eject`
+### Agregar un proyecto
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```ts
+// src/data/projects.ts
+{
+  id: 'mi-proyecto',
+  title: { es: 'Título', en: 'Title' },
+  summary: { es: '…', en: '…' },
+  status: 'completed',            // 'completed' | 'in-progress'
+  tag: 'personal',                // 'academic' | 'personal' → pestaña del grid
+  image: miImagen,                // opcional: sin imagen usa el placeholder
+  repoUrl: 'https://github.com/…',
+  demoUrl: 'https://…',
+  tech: ['react', 'ts'],          // ids de data/skills.ts
+}
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Agregar una skill
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```ts
+// src/data/skills.ts
+{ id: 'python', name: 'Python', icon: 'python', category: 'lang_ai', level: 3 }
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+El icono se resuelve en `components/ui/TechIcon.tsx`: si `simple-icons` no tiene la clave
+cae en un icono de línea de lucide y, si tampoco, en `Code`.
 
-## Learn More
+## Diseño
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- **Paleta cálida / tierra**: crema (`sand`), terracota (`clay`), oliva (`sage`),
+  marrón (`mocha`) y texto oscuro (`espresso`) — tokens en `src/index.css` → `@theme`.
+- **Tipografía**: Fraunces (display) + Inter (texto), vía Google Fonts con `display=swap`.
+- **Fondo**: tres blobs radiales con `radial-gradient` + `blur-3xl` que derivan con
+  keyframes desfasados (`GradientBackdrop`), más grano SVG al 4,5% de opacidad.
+  Compuesto por la GPU, sin canvas ni librerías.
+- **Glassmorphism**: utilidades `.glass` y `.glass-strong` con `backdrop-filter`.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Accesibilidad
 
-### Code Splitting
+- Skip link, `:focus-visible` con contraste AA, `alt` en todas las imágenes.
+- `prefers-reduced-motion` desactiva blobs, reveals y scroll suave.
+- Formulario con `<label>` visibles, `required`, `aria-describedby` de errores y honeypot.
+- Idioma: `<html lang>` sincronizado con el toggle.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Deploy
 
-### Analyzing the Bundle Size
+El repo `villella30/Portfolio` está conectado a Netlify por integración GitHub:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+1. `git push origin redesign`
+2. Abrir PR `redesign → main` → Netlify genera un **Deploy Preview**
+3. Merge a `main` → deploy a producción
 
-### Making a Progressive Web App
+> `netlify.toml` fija `publish = "dist"` (Vite) — no usar la config de CRA (`build`).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Pendiente
 
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- [ ] `src/data/experience.ts` tiene **placeholders**. Reemplazar por experiencia real o
+      dejar el array vacío (la sección no se renderiza vacía).
+- [ ] Sumar screenshots de los proyectos académicos si están disponibles.
